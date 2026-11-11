@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Burn Calendar</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Burn Calendar</h1>
+  <p>Harmonized MODIS + VIIRS active-fire hot spots, 2003–2024</p>
+</header>
+<div class="banner" id="banner">SYNTHETIC DEMO DATA: generated for development, not real fire observations.</div>
+<main>
+  <section class="panel">
+    <label>Region <select id="region"></select></label>
+    <div id="map"></div>
+    <p class="hint">Click two corners on the map to choose an area of interest.
+      <button id="reset">Use whole region</button></p>
+    <div id="validation" class="card"></div>
+  </section>
+  <section class="panel">
+    <div class="row">
+      <h2>Burning activity calendar</h2>
+      <div class="seg" id="mode">
+        <button data-m="value" class="on">Activity</button>
+        <button data-m="anomaly">Anomaly (z)</button>
+      </div>
+    </div>
+    <canvas id="cal"></canvas>
+    <div class="tip" id="tip">Hover a cell for details.</div>
+    <h2>Seasonal climate &amp; critical period</h2>
+    <canvas id="clim"></canvas>
+    <h2>Full record: raw MODIS vs harmonized</h2>
+    <canvas id="ts"></canvas>
+    <div class="cards">
+      <div class="card" id="crit"></div>
+      <div class="card" id="unusual"></div>
+    </div>
+  </section>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
