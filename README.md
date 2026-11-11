@@ -7,11 +7,12 @@ A consistent, 22-year record of satellite-detected fires. It harmonizes NASA's t
 ![Burn Calendar screenshot](docs/img/screenshot.jpg)
 
 ## What it shows
-- Year-by-week calendar of burning activity, or anomalies against that area's own seasonal baseline.
-- Typical fire season with the **critical period** (weeks at or above 50% of the seasonal peak).
-- The most unusual fire-season weeks.
-- Raw MODIS against the harmonized series across the 2012 sensor handover.
-- A validation table for the selected region.
+- A summary for any region or area: fire season (weeks at or above 50% of the seasonal peak), typical peak week, busiest year and the most extreme weeks.
+- A year-by-week burning calendar, as raw activity or compared with normal for that week, with plain-language tooltips.
+- A typical year with its normal range, and the full record of raw MODIS against the harmonized series.
+- "How far can you trust this?": the held-out validation as simple bars.
+- Region tabs, preset areas, or draw your own box. The URL records the view, so you can share it as a link.
+- Light and dark themes, a phone layout, and keyboard support for the calendar (arrow keys).
 
 ## Results (held-out 2019-2024, against real VIIRS)
 

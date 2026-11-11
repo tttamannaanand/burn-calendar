@@ -9,12 +9,13 @@ Satellites have tracked active-fire hot spots for over two decades, but the reco
 **Burn Calendar** is a web app that stitches both records into one consistent, VIIRS-equivalent history (2003–2024). For any area of interest it shows a year-by-week burning calendar, the typical fire season and its critical period, and the weeks that were unusually active. The harmonization is validated on held-out years, and the app shows those numbers next to the results.
 
 ## What the app does
-- Pick a region, then click two corners on the map to choose any area of interest.
-- **Calendar heatmap**: one row per year, one column per week. Toggle between activity and anomaly (z-score against that area's own seasonal baseline).
-- **Seasonal climatology**: the typical weekly curve (mean ± 1 sd) with the **critical period** shaded: the weeks where typical activity is at least 50% of the seasonal peak.
-- **Most unusual weeks**: the largest anomalies during fire season.
-- **Full record chart**: raw MODIS versus the harmonized series, with the VIIRS-native period shaded. Viewers see the correction itself.
-- **Harmonization check panel**: held-out validation scores for the selected region.
+- **Summary first.** For the chosen region or area: the fire season, the typical peak week, the busiest year, the area covered, and the most extreme weeks (each one jumps to its cell on the calendar).
+- **Pick any area.** Three region tabs, preset areas, or draw a box on the map. The URL records the region and area, so any view can be shared as a link.
+- **Burning calendar.** One row per year, one column per week, as raw activity or as a comparison with normal for that week. Hover, tap or use the arrow keys to read any week in plain words.
+- **A typical year.** The seasonal curve with its normal range and the fire season shaded.
+- **The full record.** Raw MODIS against the harmonized series, with the VIIRS-measured period shaded.
+- **"How far can you trust this?"** The held-out validation as simple bars, with a plain-language verdict for the region.
+- Light and dark themes, a phone layout, keyboard and screen-reader support for the calendar, and a "how it works" section with the limits stated.
 
 ## Method
 1. **Data.** NASA FIRMS standard-processing archives: MODIS (Terra + Aqua) from 2003 and VIIRS (Suomi-NPP) from 2012, through 2024. Only presumed vegetation fires are kept (`type = 0`, which drops volcanoes and static sources such as industrial flares) with nominal or high confidence.
