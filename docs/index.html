@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Burn Calendar</title>
+<meta name="theme-color" content="#f3f4f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d1116" media="(prefers-color-scheme: dark)">
 <meta name="description" content="Two NASA satellite fire records merged into one consistent history, 2003 to 2024. Explore any week and any area.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -82,7 +84,7 @@
           <canvas class="base" id="cal"></canvas><canvas class="ov" id="calOv"></canvas>
         </div>
         <p class="visually-hidden" id="calLive" aria-live="polite"></p>
-        <p class="hint">Each row is a year, each column a week. Hover or use the arrow keys to read a week.</p>
+        <p class="hint" id="calHint">Each row is a year, each column a week. Hover or use the arrow keys to read a week.</p>
       </section>
 
       <section class="card" aria-labelledby="h-clim">

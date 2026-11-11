@@ -52,4 +52,7 @@ cd ../docs && python3 -m http.server 8765                       # open http://lo
 - `docs/` the static web app and its pre-aggregated data (served by GitHub Pages)
 
 ## Data
-NASA FIRMS (https://firms.modaps.eosdis.nasa.gov). Map tiles: OpenStreetMap contributors.
+NASA FIRMS (https://firms.modaps.eosdis.nasa.gov). Map tiles: OpenStreetMap contributors. The processed data in `docs/data/` is derived from FIRMS detections.
+
+## License
+The code is released under the [MIT License](LICENSE). NASA FIRMS data and OpenStreetMap map tiles have their own terms; please credit them if you reuse the data or the map. This is not an official NASA product.

@@ -44,9 +44,9 @@
   const fmtI = n => Math.round(n).toLocaleString("en-US");
   const fmtN = n => { if (n >= 1e6) return (n / 1e6).toFixed(1).replace(/\.0$/, "") + "M"; if (n >= 1e3) return (n / 1e3).toFixed(2).replace(/\.?0+$/, "") + "k"; return String(Math.round(n * 10) / 10).replace(/\.0$/, ""); };
   const dayDate = d => new Date(Date.UTC(2001, 0, d));
-  const fmtMD = d => `${MN[d.getUTCMonth()]} ${d.getUTCDate()}`;
+  const fmtMD = d => `${MN[d.getUTCMonth()]}\u00a0${d.getUTCDate()}`;   // non-breaking so a date never splits across lines
   const wStart = w => 7 * w + 1, wEnd = w => (w === W - 1 ? 365 : 7 * w + 7);
-  const weekRange = w => { const a = dayDate(wStart(w)), b = dayDate(wEnd(w)); return a.getUTCMonth() === b.getUTCMonth() ? `${MN[a.getUTCMonth()]} ${a.getUTCDate()}–${b.getUTCDate()}` : `${fmtMD(a)} – ${fmtMD(b)}`; };
+  const weekRange = w => { const a = dayDate(wStart(w)), b = dayDate(wEnd(w)); return a.getUTCMonth() === b.getUTCMonth() ? `${MN[a.getUTCMonth()]}\u00a0${a.getUTCDate()}–${b.getUTCDate()}` : `${fmtMD(a)} – ${fmtMD(b)}`; };
   const seasonLabel = (a, b) => `${fmtMD(dayDate(wStart(a)))} – ${fmtMD(dayDate(wEnd(b)))}`;
   const niceMax = m => { if (m <= 0) return 1; const p = Math.pow(10, Math.floor(Math.log10(m))); for (const f of [1, 1.2, 1.6, 2, 2.4, 3.2, 4, 4.8, 6, 8, 10]) if (f * p >= m) return f * p; return 10 * p; };
   const zWord = (z, ok) => (!ok ? "No variation across years" : z >= 2 ? "Unusually high" : z >= 1 ? "Above normal" : z <= -2 ? "Unusually low" : z <= -1 ? "Below normal" : "About normal");
@@ -288,9 +288,11 @@
   function bind(wrap, move, leave) {
     wrap.addEventListener("pointermove", e => { const r = wrap.getBoundingClientRect(); move(e.clientX - r.left, e.clientY - r.top, e); });
     wrap.addEventListener("pointerdown", e => { const r = wrap.getBoundingClientRect(); move(e.clientX - r.left, e.clientY - r.top, e); });
-    wrap.addEventListener("pointerleave", () => { leave(); hideTip(); });
+    wrap.addEventListener("pointerleave", e => { if (e.pointerType && e.pointerType !== "mouse") return; leave(); hideTip(); });   // touch fires leave right after lift
   }
+  function clearMarks() { hideTip(); if (S.sel) { S.sel = null; drawCalSel(); } ["#clim", "#ts"].forEach(id => overlay($(id))); }
   function bindCharts() {
+    document.addEventListener("pointerdown", e => { if (e.target.closest && e.target.closest(".cv, .chip")) return; clearMarks(); }, { passive: true });
     bind($("#calWrap"), (x, y, e) => { const g = S.geo.cal; if (!g || !S.series) return; const k = Math.floor((x - g.L0) / g.cw), yr = Math.floor((y - g.T0) / g.rh);
       if (k < 0 || k >= W || yr < 0 || yr >= g.Y) { S.sel = null; drawCalSel(); hideTip(); return; } selectCell(yr, k, [e.clientX, e.clientY]); }, () => { S.sel = null; drawCalSel(); });
     $("#calWrap").addEventListener("keydown", e => {
@@ -344,7 +346,8 @@
     $("#reset").onclick = () => { setDrawing(false); setAOI(null); };
     document.addEventListener("keydown", e => { if (e.key === "Escape" && S.drawing) setDrawing(false); });
     $("#mode").onclick = e => { const m = e.target.dataset && e.target.dataset.m; if (!m || m === S.mode) return; S.mode = m; document.querySelectorAll("#mode button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.m === m))); S.sel = null; hideTip(); drawAll(); };
-    addEventListener("scroll", () => { if (!S.jumping) { hideTip(); if (S.sel && S.geo.cal) { S.sel = null; drawCalSel(); } } }, { passive: true });
+    addEventListener("scroll", () => { if (!S.jumping) clearMarks(); }, { passive: true });
+    if (matchMedia("(hover: none)").matches) $("#calHint").textContent = "Each row is a year, each column a week. Tap a week to read it.";
     initMap(); bindCharts();
     // Re-fit whenever the map box changes size (layout settling, rotation, hidden at load).
     new ResizeObserver(() => { map.invalidateSize(); if (S.fit && !S.aoi) map.fitBounds(S.fit, { animate: false }); }).observe($("#map"));

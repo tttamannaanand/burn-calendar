@@ -180,3 +180,4 @@ details p{margin-top:8px}
   .bar{grid-template-columns:76px 1fr 40px}
   .hero{padding-top:24px}
 }
+.scale span:first-child{white-space:nowrap}
