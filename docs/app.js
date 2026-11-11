@@ -250,7 +250,7 @@
   function jumpTo(y, k) {
     S.jumping = true; hideTip(); $("#calWrap").scrollIntoView({ block: "center", behavior: "smooth" });
     let last = -1, still = 0;
-    const tick = () => { if (scrollY === last) still++; else { still = 0; last = scrollY; } if (still >= 6) { S.jumping = false; selectCell(y, k); } else requestAnimationFrame(tick); };
+    const tick = () => { if (scrollY === last) still++; else { still = 0; last = scrollY; } if (still >= 6) { selectCell(y, k); setTimeout(() => { S.jumping = false; }, 500); /* ignore trailing scroll events */ } else requestAnimationFrame(tick); };
     requestAnimationFrame(tick);
   }
 
