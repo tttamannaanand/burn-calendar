@@ -124,7 +124,6 @@ function drawTS() {
   line(c, S.rawSeries, x, y, css("--mut"), [4, 3]); line(c, S.series, x, y, css("--acc"));
   c.fillStyle = css("--mut");
   for (let yr = d.start_year; yr <= d.end_year; yr += 4) c.fillText(yr, x((yr - d.start_year) * d.weeks_per_year) - 10, h - 6);
-  c.fillText("grey dashed = raw MODIS · orange = harmonized (VIIRS-equivalent) · blue band = VIIRS native", L0 + 4, 11);
 }
 const drawAll = () => { if (S.data) { drawCal(); drawClim(); drawTS(); } };
 init();

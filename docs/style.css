@@ -18,3 +18,6 @@ button{cursor:pointer}.seg button.on{background:var(--acc);color:#fff;border-col
 .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:13px}
 .card h3{margin:0 0 4px;font-size:13px}.card ul{margin:4px 0 0;padding-left:18px}
 table{border-collapse:collapse;width:100%}td,th{text-align:left;padding:2px 6px 2px 0}
+.legend{margin:0 0 6px;color:var(--mut);font-size:13px;display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center}
+.k{display:inline-block;width:18px;height:0;border-top:2px solid;margin-right:5px;vertical-align:middle}
+.k.raw{border-top:2px dashed #94a3b8}.k.harm{border-top-color:var(--acc)}.k.band{height:10px;border:0;background:rgba(37,99,235,.25);width:18px}
